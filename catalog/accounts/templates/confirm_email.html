@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Success! Your Email <span class="text-success">{{ email }}</span> has been confirmed!</h2>
+    <a href="{% url 'products:index' %}" class="btn btn-success" type="button">Go to Home</a>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load math_filters %}
+{% load static %}
+
+{% block content %}
+    <div class="container my-3">
+        <div class="row">
+            <div class="col-md-6">
+                <img
+        src="{% if product.image_path %}{{ product.image_path }}{% else %}{% static 'images/dimon.jpg' %}
+        {% endif %}"
+        alt="product image"
+        style="
+          width: 600px;
+          height: 700px;
+          object-fit: cover;
+          border-radius: 10px;
+        "
+      />
+            </div>
+            <div class="col-md-6">
+                <h5>{{ product.name }}</h5>
+                <h6>Category: {{ product.category.name }}</h6>
+            </div>
+            <div class="product-rating">
+                {% for i in "12345" %} {% if forloop.counter <= product.rating %}
+                    <i class="bi bi-star-fill text-warning"></i>
+                {% else %}
+                    <i class="bi bi-star text-muted"></i>
+                {% endif %} 
+                {% endfor %}
+            </div>
+            <div>
+                {% if not product.available %}
+                    <span class="text-muted ">Not available</span>
+                {% else %}
+                    <span class="text-success"> Available: {{ product.stock }} left</span>
+                {% endif %}
+            </div>
+            <div class="col-md-6">
+                {% if product.discount %}
+                    <span class="text-success">${{ product.price|calculate_discount:product.discount }} </span>
+                    <span class="text-muted text-decoration-line-through">${{ product.price }}</span>
+                {% else %}
+                    <span class="text-success">${{ product.price }}</span>
+                {% endif %}
+            </div>
+            <h5>Nomenclature: {{ product.nomenclature }}</h5>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                {% if product.description %}
+                    <p>Description: {{ product.description }}</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <table class="table table-bordered">
+                    {% for key, value in product.attributes.items %}
+                        <tr>
+                            <th>
+                                {{ key }}
+                            </th>
+                            <td>
+                                {{ value }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

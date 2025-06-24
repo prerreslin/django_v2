@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Create New Password</h2>
+    {% if validlink %}
+        <p>Enter your new password twice, then submit</p>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input class="btn btn-primary" type="submit" value="Submit">
+        </form>
+    {% else %}
+        <p>Invalid Link</p>
+        <a href="{% url 'accounts:password_reset' %}">Try Again</a>
+    {% endif %}
+{% endblock %}

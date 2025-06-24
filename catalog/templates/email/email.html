@@ -1,0 +1,11 @@
+Hello!
+
+You (or someone else) has sent a request for password recovery for an account on the website Product.
+
+To recover the password follow this link:
+{{protocol}}://{{domain}}{% url 'accounts:password_reset_confirm' uidb64=uid token=token %}
+
+If you did not make this request, you can safely ignore this letter.
+
+Kind regards,
+Administaration of Product.

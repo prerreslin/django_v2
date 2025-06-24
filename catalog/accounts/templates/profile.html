@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Profile-{{ request.user.username }}</h2>
+    {% if messages %}
+        {% for message in messages %}
+            <p class="text-success">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+    <ul>
+        <img src="{{ profile.avatar.url }}" alt="avatar" width="150">
+        <li>Username: {{ request.user.username }}</li>
+        <li>Email: {{ request.user.email }}</li>
+    </ul>
+    <a href="{% url 'accounts:password_change' %}" class="btn btn-primary">Change Password</a>
+    <a href="{% url 'accounts:edit_profile' %}">Edit Profile</a>
+    
+{% endblock %}
