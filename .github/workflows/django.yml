@@ -28,3 +28,8 @@ jobs:
     - name: Run Tests
       run: |
         pytest -s
+    - name: Build Docker image
+      run: |
+        docker build -t catalog .
+        docker run -p 8000:8000 -d --name catalog catalog
+        
